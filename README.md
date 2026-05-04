@@ -74,6 +74,3 @@ Auto-detects one of:
 - `pbcopy`
 - `clip.exe`
 
-Authentication note:
-- With `gh auth login`, prefer browser login when prompted.
-- If you choose HTTPS + token, the token is used as the credential (not your GitHub account password).
