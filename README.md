@@ -30,7 +30,8 @@ Use it when you want to capture command output, save a full terminal session log
 ## Install
 
 ```bash
-cd /home/lancedesk/Projects/local-network/terminal-log-copier
+git clone https://github.com/lancedesk/terminal-log-copier.git
+cd terminal-log-copier
 chmod +x install.sh
 ./install.sh
 ```
