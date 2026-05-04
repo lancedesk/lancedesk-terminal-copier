@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  shell-quality:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Install shellcheck (macOS)
+        if: runner.os == 'macOS'
+        run: brew install shellcheck
+
+      - name: Shell syntax check
+        run: |
+          bash -n ld.sh
+          bash -n install.sh
+          bash -n uninstall.sh
+
+      - name: Shellcheck
+        run: |
+          shellcheck ld.sh install.sh uninstall.sh
+
+      - name: Run smoke test
+        run: |
+          chmod +x tests/smoke_test.sh
+          ./tests/smoke_test.sh
