@@ -1,10 +1,8 @@
 # Terminal Log Copier (ld)
 
-Friendly terminal session recorder for Linux/macOS/WSL shells (bash and zsh).
+Copy terminal output to clipboard fast. `ld` is a lightweight terminal log recorder, shell output copier, and CLI session recorder for bash and zsh on Linux, macOS, and WSL.
 
-This project helps you record command output, then copy the whole log to clipboard in one command for sharing with AI tools, teammates, or bug reports.
-
-Search keywords: terminal log copier, shell output recorder, copy terminal output, bash logger, zsh logger, cli session recorder.
+Use it when you want to capture command output, save a full terminal session log, and paste the result into AI tools, issue reports, or chat messages with one command.
 
 ## Why this project
 
@@ -12,6 +10,13 @@ Search keywords: terminal log copier, shell output recorder, copy terminal outpu
 - Works in normal shell flow
 - Fast clipboard copy with `ld c`
 - Auto-available in new terminal sessions after install
+
+## Best for
+
+- Copying terminal output into ChatGPT, Claude, or other AI tools
+- Sharing bug reports with full command logs
+- Keeping a clean record of script output during debugging
+- Bash and zsh users who want a quick clipboard workflow
 
 ## Commands
 
@@ -25,9 +30,25 @@ Search keywords: terminal log copier, shell output recorder, copy terminal outpu
 ## Install
 
 ```bash
+cd /home/lancedesk/Projects/local-network/terminal-log-copier
 chmod +x install.sh
 ./install.sh
+```
+
+Reload your current shell:
+
+```bash
+# zsh
 source ~/.zshrc
+
+# bash
+source ~/.bashrc
+```
+
+Verify:
+
+```bash
+ld help
 ```
 
 ## Quick usage
@@ -53,13 +74,6 @@ Auto-detects one of:
 - `pbcopy`
 - `clip.exe`
 
-## Publish to GitHub
-
-```bash
-git init
-git add .
-git commit -m "feat: initial terminal log copier"
-git branch -M main
-git remote add origin <YOUR_GITHUB_REPO_URL>
-git push -u origin main
-```
+Authentication note:
+- With `gh auth login`, prefer browser login when prompted.
+- If you choose HTTPS + token, the token is used as the credential (not your GitHub account password).
