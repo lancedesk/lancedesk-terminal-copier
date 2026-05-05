@@ -12,24 +12,19 @@ _ld_err() {
 }
 
 _ld_copy_to_clipboard() {
-  if command -v wl-copy >/dev/null 2>&1; then
-    wl-copy
+  if command -v wl-copy >/dev/null 2>&1 && wl-copy; then
     return 0
   fi
-  if command -v xclip >/dev/null 2>&1; then
-    xclip -selection clipboard
+  if command -v xclip >/dev/null 2>&1 && xclip -selection clipboard; then
     return 0
   fi
-  if command -v xsel >/dev/null 2>&1; then
-    xsel --clipboard --input
+  if command -v xsel >/dev/null 2>&1 && xsel --clipboard --input; then
     return 0
   fi
-  if command -v pbcopy >/dev/null 2>&1; then
-    pbcopy
+  if command -v pbcopy >/dev/null 2>&1 && pbcopy; then
     return 0
   fi
-  if command -v clip.exe >/dev/null 2>&1; then
-    clip.exe
+  if command -v clip.exe >/dev/null 2>&1 && clip.exe; then
     return 0
   fi
   return 1

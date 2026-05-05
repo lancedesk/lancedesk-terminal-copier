@@ -5,6 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 TEST_HOME="$(mktemp -d)"
+FAKE_BIN="$TEST_HOME/bin"
+mkdir -p "$FAKE_BIN"
 
 cleanup() {
   rm -rf "$TEST_HOME"
@@ -12,8 +14,18 @@ cleanup() {
 trap cleanup EXIT
 
 export HOME="$TEST_HOME"
-# Deliberately avoid providing any supported clipboard tool in PATH.
-export PATH="/usr/bin:/bin"
+
+# Shadow all supported clipboard commands with failing stubs so this test is
+# deterministic even on environments where clipboard tools are preinstalled.
+for cmd in wl-copy xclip xsel pbcopy clip.exe; do
+  cat > "$FAKE_BIN/$cmd" <<'EOF'
+#!/usr/bin/env bash
+exit 1
+EOF
+  chmod +x "$FAKE_BIN/$cmd"
+done
+
+export PATH="$FAKE_BIN:/usr/bin:/bin"
 
 # shellcheck source=/dev/null
 source "$PROJECT_ROOT/ld.sh"

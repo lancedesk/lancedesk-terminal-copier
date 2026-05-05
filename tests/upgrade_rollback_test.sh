@@ -20,7 +20,7 @@ ld() { echo "OLD_VERSION_MARKER"; }
 EOF
 chmod +x "$HOME/.config/ld/ld.sh"
 
-"$PROJECT_ROOT/install.sh"
+bash "$PROJECT_ROOT/install.sh"
 
 last_backup_file="$HOME/.config/ld/backups/last_backup"
 if [ ! -f "$last_backup_file" ]; then
@@ -45,7 +45,7 @@ cat > "$HOME/.config/ld/ld.sh" <<'EOF'
 ld() { echo "BROKEN_VERSION_MARKER"; }
 EOF
 
-"$HOME/.config/ld/install.sh" --rollback
+bash "$HOME/.config/ld/install.sh" --rollback
 
 if ! grep -q "OLD_VERSION_MARKER" "$HOME/.config/ld/ld.sh"; then
   echo "rollback did not restore the previous version"
