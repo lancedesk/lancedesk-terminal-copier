@@ -8,6 +8,7 @@ DEST_DIR="$HOME/.config/ld"
 DEST_FILE="$DEST_DIR/ld.sh"
 INSTALL_FILE="$DEST_DIR/install.sh"
 DEST_VERSION_FILE="$DEST_DIR/VERSION"
+# shellcheck disable=SC2016
 SOURCE_LINE='[ -f "$HOME/.config/ld/ld.sh" ] && source "$HOME/.config/ld/ld.sh"'
 UNINSTALL_HINT="$DEST_DIR/uninstall.sh"
 BACKUP_DIR="$DEST_DIR/backups"

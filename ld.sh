@@ -87,7 +87,9 @@ ld() {
       fi
 
       mkdir -p "$logs_dir" "$state_dir"
-      export LD_LOG_FILE="$logs_dir/ld-$(date +%Y%m%d-%H%M%S).log"
+      local new_log_file
+      new_log_file="$logs_dir/ld-$(date +%Y%m%d-%H%M%S).log"
+      export LD_LOG_FILE="$new_log_file"
       : > "$LD_LOG_FILE"
       printf '%s\n' "$LD_LOG_FILE" > "$state_file"
 
@@ -164,7 +166,8 @@ ld() {
         echo "[ld] Log file: ${LD_LOG_FILE}"
       else
         echo "[ld] Status: idle"
-        local file="$(_ld_last_log_file)"
+        local file
+        file="$(_ld_last_log_file)"
         if [ -n "$file" ]; then
           echo "[ld] Last log: $file"
         fi

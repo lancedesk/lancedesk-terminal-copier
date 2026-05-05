@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DEST_DIR="$HOME/.config/ld"
-DEST_FILE="$DEST_DIR/ld.sh"
+# shellcheck disable=SC2016
 SOURCE_LINE='[ -f "$HOME/.config/ld/ld.sh" ] && source "$HOME/.config/ld/ld.sh"'
 
 remove_source_line() {
