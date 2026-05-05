@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LanceDesk Terminal Copier</title>
+    <meta
+      name="description"
+      content="Record terminal output and copy full session logs in one command."
+    />
+    <link rel="stylesheet" href="./landing.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <img class="logo" src="../assets/logo-mark.svg" alt="LanceDesk logo" />
+        <h1>LanceDesk Terminal Copier</h1>
+        <p>Record terminal output. Copy complete logs instantly.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/lancedesk/lancedesk-terminal-copier">View on GitHub</a>
+          <a class="btn" href="https://github.com/lancedesk/lancedesk-terminal-copier/releases">Releases</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Why teams use ld</h2>
+        <ul>
+          <li>Capture full command + output history from real terminal sessions.</li>
+          <li>Copy logs with one command for bug reports, incidents, and AI prompts.</li>
+          <li>Keep a fast shell-native workflow without running a daemon.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Quick start</h2>
+        <pre><code>git clone https://github.com/lancedesk/lancedesk-terminal-copier.git
+cd lancedesk-terminal-copier
+chmod +x install.sh
+./install.sh && source ~/.config/ld/ld.sh</code></pre>
+      </section>
+
+      <section class="card">
+        <h2>Demo (placeholder)</h2>
+        <div class="placeholder">
+          <strong>GIF/video placeholder</strong>
+          <p>Add a 30-60s demo here showing: <code>ld start</code> -> workload -> <code>ld stop</code> -> <code>ld c</code>.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Command flow</h2>
+        <pre><code>ld start
+# run scripts, tests, builds
+ld stop
+ld c</code></pre>
+      </section>
+    </main>
+  </body>
+  </html>

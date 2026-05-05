@@ -124,6 +124,7 @@ Rollback to the latest backup:
 
 ## Documentation
 
+- Project landing page (GitHub Pages): `docs/index.html`
 - `docs/architecture.md` - runtime model and internals
 - `docs/security.md` - privacy and safe-usage guidance
 - `docs/faq.md` - troubleshooting and common questions
