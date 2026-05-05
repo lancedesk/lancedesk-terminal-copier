@@ -33,7 +33,7 @@ _ld_copy_to_clipboard() {
 _ld_sanitize_stream() {
   # Strip common OSC/ANSI control sequences from terminal output to produce
   # paste-friendly text similar to manual terminal selection.
-  perl -pe 's/\e\][^\a]*(?:\a|\e\\)//g; s/\e\[[0-9;?]*[ -\/]*[@-~]//g'
+  perl -pe 's/\e\][^\a]*(?:\a|\e\\)//g; s/\e\[[0-9;?]*[ -\/]*[@-~]//g; s/\e[=>]//g; s/\r//g; s/[\x00-\x08\x0B-\x1F\x7F]//g'
 }
 
 _ld_last_log_file() {

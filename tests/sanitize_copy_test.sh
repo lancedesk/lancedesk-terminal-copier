@@ -27,12 +27,16 @@ export PATH="$FAKE_BIN:$PATH"
 source "$PROJECT_ROOT/ld.sh"
 
 sample_log="$TEST_HOME/sample.log"
-printf '%b\n' '\033]633;D;0\ahello \033[31mred\033[0m world' > "$sample_log"
+printf '%b\n' '\033=\033> \033]633;D;0\ahello \033[31mred\033[0m world' > "$sample_log"
 
 ld c "$sample_log" >/dev/null
 clean_payload="$(cat "$CLIPBOARD_FILE")"
 if printf '%s' "$clean_payload" | grep -q $'\033'; then
   echo "expected clean copy without escape codes"
+  exit 1
+fi
+if printf '%s' "$clean_payload" | grep -Eq '[\x00-\x08\x0B-\x1F\x7F]'; then
+  echo "expected clean copy without control bytes"
   exit 1
 fi
 if ! printf '%s' "$clean_payload" | grep -Eq 'hello[[:space:]]+red[[:space:]]+world'; then
