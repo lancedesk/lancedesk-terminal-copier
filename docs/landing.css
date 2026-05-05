@@ -48,6 +48,10 @@ p {
   color: var(--muted);
 }
 
+a {
+  color: var(--accent-2);
+}
+
 .cta-row {
   margin-top: 22px;
   display: flex;
