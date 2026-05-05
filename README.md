@@ -127,6 +127,7 @@ Rollback to the latest backup:
 - `docs/roadmap.md` - public roadmap
 - `docs/release.md` - semantic versioning and release checklist
 - `docs/team-examples.md` - incident/bug/AI templates for teams
+- `docs/launch.md` - launch announcement and distribution checklist
 
 ## Project policies
 
