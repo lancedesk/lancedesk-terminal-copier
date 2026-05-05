@@ -52,3 +52,8 @@ jobs:
         run: |
           chmod +x tests/state_transition_test.sh
           ./tests/state_transition_test.sh
+
+      - name: Run sanitize copy test
+        run: |
+          chmod +x tests/sanitize_copy_test.sh
+          ./tests/sanitize_copy_test.sh

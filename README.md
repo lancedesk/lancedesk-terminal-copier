@@ -56,10 +56,12 @@ Now paste with `Ctrl+V` into issue reports, chats, or AI tools.
 
 - `ld start` - start recording in current shell session
 - `ld stop` - stop recording
-- `ld c` - copy current/last log to clipboard
+- `ld c` - copy current/last log to clipboard (clean/sanitized)
+- `ld c --raw` - copy raw log including control sequences
 - `ld +c` - alias of `ld c`
 - `ld status` - show recorder state
-- `ld show` - print current/last log
+- `ld show` - print raw current/last log
+- `ld show --clean` - print sanitized current/last log
 - `ld recover` - reset recorder state after interrupted sessions
 - `ld version` - show installed version
 - `ld help` - show command help
@@ -150,6 +152,7 @@ Rollback to the latest backup:
 ./tests/clipboard_fallback_test.sh
 ./tests/upgrade_rollback_test.sh
 ./tests/state_transition_test.sh
+./tests/sanitize_copy_test.sh
 ```
 
 ## License

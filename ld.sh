@@ -30,6 +30,12 @@ _ld_copy_to_clipboard() {
   return 1
 }
 
+_ld_sanitize_stream() {
+  # Strip common OSC/ANSI control sequences from terminal output to produce
+  # paste-friendly text similar to manual terminal selection.
+  perl -pe 's/\e\][^\a]*(?:\a|\e\\)//g; s/\e\[[0-9;?]*[ -\/]*[@-~]//g'
+}
+
 _ld_last_log_file() {
   local state_file="$HOME/.local/state/ld/current_log"
   if [ -f "$state_file" ]; then
@@ -125,28 +131,94 @@ ld() {
       ;;
 
     c|copy|+c)
-      local file="${2:-${LD_LOG_FILE:-$(_ld_last_log_file)}}"
+      local mode="clean"
+      local file=""
+      local arg
+      while [ $# -gt 1 ]; do
+        shift
+        arg="$1"
+        case "$arg" in
+          --raw)
+            mode="raw"
+            ;;
+          --clean)
+            mode="clean"
+            ;;
+          *)
+            if [ -z "$file" ]; then
+              file="$arg"
+            else
+              _ld_err 2 "[ld] Unexpected argument: $arg"
+              return 2
+            fi
+            ;;
+        esac
+      done
+
+      if [ -z "$file" ]; then
+        file="${LD_LOG_FILE:-$(_ld_last_log_file)}"
+      fi
       if [ -z "$file" ] || [ ! -f "$file" ]; then
         _ld_err 20 "[ld] No log file found. Start a recording first with: ld start"
         return 20
       fi
 
-      if _ld_copy_to_clipboard < "$file"; then
-        echo "[ld] Copied to clipboard: $file"
+      if [ "$mode" = "raw" ]; then
+        if _ld_copy_to_clipboard < "$file"; then
+          echo "[ld] Copied raw log to clipboard: $file"
+        else
+          _ld_err 21 "[ld] Could not find clipboard tool (wl-copy/xclip/xsel/pbcopy/clip.exe)"
+          _ld_err 21 "[ld] Log file is still available at: $file"
+          return 21
+        fi
       else
-        _ld_err 21 "[ld] Could not find clipboard tool (wl-copy/xclip/xsel/pbcopy/clip.exe)"
-        _ld_err 21 "[ld] Log file is still available at: $file"
-        return 21
+        if _ld_sanitize_stream < "$file" | _ld_copy_to_clipboard; then
+          echo "[ld] Copied clean log to clipboard: $file"
+        else
+          _ld_err 21 "[ld] Could not find clipboard tool (wl-copy/xclip/xsel/pbcopy/clip.exe)"
+          _ld_err 21 "[ld] Log file is still available at: $file"
+          return 21
+        fi
       fi
       ;;
 
     show)
-      local file="${2:-${LD_LOG_FILE:-$(_ld_last_log_file)}}"
+      local mode="raw"
+      local file=""
+      local arg
+      while [ $# -gt 1 ]; do
+        shift
+        arg="$1"
+        case "$arg" in
+          --clean)
+            mode="clean"
+            ;;
+          --raw)
+            mode="raw"
+            ;;
+          *)
+            if [ -z "$file" ]; then
+              file="$arg"
+            else
+              _ld_err 2 "[ld] Unexpected argument: $arg"
+              return 2
+            fi
+            ;;
+        esac
+      done
+
+      if [ -z "$file" ]; then
+        file="${LD_LOG_FILE:-$(_ld_last_log_file)}"
+      fi
       if [ -z "$file" ] || [ ! -f "$file" ]; then
         _ld_err 22 "[ld] No log file found"
         return 22
       fi
-      cat "$file"
+      if [ "$mode" = "clean" ]; then
+        _ld_sanitize_stream < "$file"
+      else
+        cat "$file"
+      fi
       ;;
 
     status)
@@ -187,9 +259,11 @@ ld() {
 ld command help:
   ld start         Start recording terminal output in this shell
   ld stop          Stop recording in this shell
-  ld c             Copy current/last log to clipboard
+  ld c             Copy current/last log to clipboard (clean by default)
+  ld c --raw       Copy raw log (with terminal control sequences)
   ld +c            Same as ld c
-  ld show          Print current/last log to terminal
+  ld show          Print raw current/last log to terminal
+  ld show --clean  Print sanitized current/last log to terminal
   ld status        Show recorder status and file
   ld recover       Reset recorder state after interrupted sessions
   ld version       Show installed ld version

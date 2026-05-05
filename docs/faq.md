@@ -13,6 +13,16 @@ No. Logging is session-scoped. You choose where to capture by running `ld start`
 Install one of the supported tools (`wl-copy`, `xclip`, `xsel`, `pbcopy`, `clip.exe`) and retry. Your log file still exists and can be viewed with `ld show`.
 `ld c` returns exit code `21` in this scenario, which is useful for scripts.
 
+## Why does copied output sometimes include strange control characters?
+
+Terminal sessions can contain ANSI/OSC control sequences (for color, cursor movement, shell integration metadata). `ld c` now sanitizes output by default for cleaner sharing.
+
+If you need exact raw bytes, use:
+
+```bash
+ld c --raw
+```
+
 ## Where is my latest log stored?
 
 The path is tracked in `~/.local/state/ld/current_log`. Use `ld status` or `ld show`.
