@@ -8,7 +8,7 @@ import urllib.request
 
 
 def main() -> int:
-    version = sys.argv[1] if len(sys.argv) > 1 else "0.1.0"
+    version = sys.argv[1] if len(sys.argv) > 1 else "0.2.0"
     script_url = (
         "https://raw.githubusercontent.com/"
         "lancedesk/lancedesk-terminal-copier/main/scripts/install-release.sh"

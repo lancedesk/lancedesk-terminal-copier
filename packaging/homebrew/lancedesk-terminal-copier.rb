@@ -1,7 +1,7 @@
 class LancedeskTerminalCopier < Formula
   desc "Record terminal output and copy full session logs quickly"
   homepage "https://github.com/lancedesk/lancedesk-terminal-copier"
-  url "https://github.com/lancedesk/lancedesk-terminal-copier/archive/refs/tags/v0.1.0.tar.gz"
+  url "https://github.com/lancedesk/lancedesk-terminal-copier/archive/refs/tags/v0.2.0.tar.gz"
   sha256 "REPLACE_WITH_RELEASE_TARBALL_SHA256"
   license "MIT"
 
