@@ -1,5 +1,7 @@
 # LanceDesk Terminal Copier (`ld`)
 
+![LanceDesk Terminal Copier banner](assets/readme-banner.svg)
+
 [![CI](https://github.com/lancedesk/lancedesk-terminal-copier/actions/workflows/ci.yml/badge.svg)](https://github.com/lancedesk/lancedesk-terminal-copier/actions/workflows/ci.yml)
 
 Record terminal output and copy full session logs in one command.

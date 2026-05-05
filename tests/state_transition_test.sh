@@ -65,4 +65,17 @@ if ! printf '%s' "$status_output" | grep -q "Status: idle"; then
   exit 1
 fi
 
+# Simulate stale "active" state and ensure a new start auto-heals it.
+export LD_ACTIVE=1
+export LD_FDS_SAVED=1
+set +e
+ld start >/dev/null 2>&1
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+  echo "expected ld start to auto-heal stale state, got status $status"
+  exit 1
+fi
+ld stop >/dev/null
+
 echo "state transition test passed"

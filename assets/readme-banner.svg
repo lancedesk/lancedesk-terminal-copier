@@ -1,0 +1,18 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#132145"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+  <rect x="54" y="54" width="212" height="212" rx="32" fill="#111A33" stroke="#2A3D73" stroke-width="2"/>
+  <path d="M96 167L132 133V153L114 166L132 179V199L96 169V167Z" fill="#5EA0FF"/>
+  <rect x="148" y="182" width="66" height="12" rx="6" fill="#73F0C3"/>
+  <circle cx="92" cy="94" r="6" fill="#FC6D6D"/>
+  <circle cx="112" cy="94" r="6" fill="#F6C35B"/>
+  <circle cx="132" cy="94" r="6" fill="#73F0C3"/>
+  <text x="304" y="140" fill="#EAF1FF" font-size="54" font-family="Segoe UI, Inter, Arial, sans-serif" font-weight="700">LanceDesk Terminal Copier</text>
+  <text x="304" y="186" fill="#9DB5E8" font-size="28" font-family="Segoe UI, Inter, Arial, sans-serif">Record terminal output. Copy complete logs instantly.</text>
+  <text x="304" y="228" fill="#73F0C3" font-size="26" font-family="Consolas, Menlo, monospace">ld start   ld stop   ld c</text>
+</svg>

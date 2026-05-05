@@ -51,6 +51,24 @@ _ld_version() {
   fi
 }
 
+_ld_fds_healthy() {
+  # Validate that saved stdout/stderr descriptors are still usable.
+  { : >&9; : >&8; } 2>/dev/null
+}
+
+_ld_heal_if_stale() {
+  if [ "${LD_ACTIVE:-0}" != "1" ]; then
+    return 0
+  fi
+
+  if [ "${LD_FDS_SAVED:-0}" != "1" ] || ! _ld_fds_healthy; then
+    unset LD_ACTIVE LD_FDS_SAVED
+    return 1
+  fi
+
+  return 0
+}
+
 ld() {
   local cmd="${1:-help}"
   local logs_dir="$HOME/.local/share/ld/logs"
@@ -59,6 +77,10 @@ ld() {
 
   case "$cmd" in
     start)
+      if ! _ld_heal_if_stale; then
+        echo "[ld] Recovered stale recorder state before starting a new session"
+      fi
+
       if [ "${LD_ACTIVE:-0}" = "1" ]; then
         _ld_err 10 "[ld] Already recording: ${LD_LOG_FILE}"
         return 10
@@ -88,6 +110,12 @@ ld() {
       if [ "${LD_FDS_SAVED:-0}" != "1" ]; then
         unset LD_ACTIVE LD_FDS_SAVED
         _ld_err 12 "[ld] Recorder state is inconsistent. Use: ld status ; ld start"
+        return 12
+      fi
+
+      if ! _ld_fds_healthy; then
+        unset LD_ACTIVE LD_FDS_SAVED
+        _ld_err 12 "[ld] Recorder state lost output descriptors. Run: ld recover ; ld start"
         return 12
       fi
 
@@ -126,6 +154,12 @@ ld() {
 
     status)
       if [ "${LD_ACTIVE:-0}" = "1" ]; then
+        if ! _ld_fds_healthy; then
+          unset LD_ACTIVE LD_FDS_SAVED
+          echo "[ld] Status: idle"
+          echo "[ld] Note: stale recorder state was auto-recovered"
+          return 0
+        fi
         echo "[ld] Status: recording"
         echo "[ld] Log file: ${LD_LOG_FILE}"
       else
