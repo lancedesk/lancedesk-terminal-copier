@@ -128,6 +128,7 @@ Rollback to the latest backup:
 - `docs/release.md` - semantic versioning and release checklist
 - `docs/team-examples.md` - incident/bug/AI templates for teams
 - `docs/launch.md` - launch announcement and distribution checklist
+- `docs/distribution.md` - Homebrew and release distribution guide
 
 ## Project policies
 
