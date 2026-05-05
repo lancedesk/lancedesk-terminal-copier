@@ -1,0 +1,19 @@
+{
+  "name": "lancedesk-terminal-copier",
+  "version": "0.1.0",
+  "description": "Discoverability wrapper for LanceDesk Terminal Copier",
+  "license": "MIT",
+  "bin": {
+    "ld-install-release": "bin/ld-install-release"
+  },
+  "files": [
+    "bin/ld-install-release",
+    "README.md"
+  ],
+  "keywords": [
+    "terminal",
+    "logs",
+    "cli",
+    "lancedesk"
+  ]
+}

@@ -133,6 +133,8 @@ Rollback to the latest backup:
 - `docs/team-examples.md` - incident/bug/AI templates for teams
 - `docs/launch.md` - launch announcement and distribution checklist
 - `docs/distribution.md` - Homebrew and release distribution guide
+- `wrappers/npm` - npm discoverability wrapper scaffold
+- `wrappers/pip` - pip discoverability wrapper scaffold
 
 ## Project policies
 

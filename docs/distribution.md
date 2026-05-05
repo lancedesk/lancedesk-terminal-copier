@@ -18,17 +18,40 @@ This guide covers practical distribution channels for `ld`.
    - `ld-install`
    - `source ~/.config/ld/ld.sh`
 
+## APT package option or signed installer flow
+
+APT repository packaging is optional and can come later. A signed release installer path is implemented now.
+
+Installer script:
+
+- `./scripts/install-release.sh <version>`
+
+Artifact builder:
+
+- `./scripts/build-release-artifacts.sh <version>`
+
+Release asset pattern:
+
+- `lancedesk-terminal-copier-vX.Y.Z.tar.gz`
+- `checksums.txt`
+- `checksums.txt.asc` (optional but recommended)
+
+When `checksums.txt.asc` is present and `gpg` is installed, the installer verifies signature before install.
+
 ## Signed-release installer flow
 
-If package managers are not available, use versioned GitHub release assets and checksums:
+If package managers are not available, use versioned GitHub release assets and checksums/signatures:
 
 - Publish release tarball checksums with each tag.
-- Verify checksums before install in automation environments.
+- Sign `checksums.txt` with `gpg --armor --detach-sign`.
+- Verify checksums and signature before install in automation environments.
 - Keep rollback instructions in `README.md` and `docs/faq.md`.
 
-## APT option (future)
+## npm/pip wrappers (discoverability)
 
-APT packaging is planned but not yet implemented. Until then, use:
+Wrapper scaffolding is included for distribution channels where users discover tools via language package indexes:
 
-- Homebrew tap for macOS/Linux users already on brew.
-- GitHub release install flow for general Linux environments.
+- npm wrapper: `wrappers/npm/`
+- pip wrapper: `wrappers/pip/`
+
+Both wrappers call the same release installer flow.

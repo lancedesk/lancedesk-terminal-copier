@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+version="${1:-0.1.0}"
+script_url="https://raw.githubusercontent.com/lancedesk/lancedesk-terminal-copier/main/scripts/install-release.sh"
+
+tmp_script="$(mktemp)"
+cleanup() {
+  rm -f "$tmp_script"
+}
+trap cleanup EXIT
+
+curl -fsSL "$script_url" -o "$tmp_script"
+chmod +x "$tmp_script"
+"$tmp_script" "$version"

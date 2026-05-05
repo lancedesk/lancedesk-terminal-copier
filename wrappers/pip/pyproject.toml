@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lancedesk-terminal-copier"
+version = "0.1.0"
+description = "Discoverability wrapper for LanceDesk Terminal Copier"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "LanceDesk" }]
+
+[project.scripts]
+ld-install-release = "lancedesk_terminal_copier.cli:main"
