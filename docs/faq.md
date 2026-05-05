@@ -34,6 +34,7 @@ A script started as `./install.sh` runs in a **child process**. It can write fil
 ## What does "recorder state is inconsistent" mean?
 
 It means `ld` detected a broken in-shell recording state (for example, missing saved file descriptors). Run `ld status`, then start a new recording with `ld start`. This condition returns exit code `12`.
+You can also run `ld recover` to force-reset recorder state to idle in the current shell.
 
 ## How do upgrades work and can I roll back?
 

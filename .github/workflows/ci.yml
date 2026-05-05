@@ -47,3 +47,8 @@ jobs:
         run: |
           chmod +x tests/upgrade_rollback_test.sh
           ./tests/upgrade_rollback_test.sh
+
+      - name: Run state transition test
+        run: |
+          chmod +x tests/state_transition_test.sh
+          ./tests/state_transition_test.sh

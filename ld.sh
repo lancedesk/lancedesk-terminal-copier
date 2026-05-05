@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 # ld: lightweight terminal logger for bash/zsh
-# Usage: ld start | ld stop | ld c | ld status | ld show | ld help
+# Usage: ld start | ld stop | ld c | ld status | ld show | ld recover | ld help
 
 _ld_err() {
   local code="$1"
@@ -137,6 +137,15 @@ ld() {
       fi
       ;;
 
+    recover)
+      if [ "${LD_ACTIVE:-0}" = "1" ] && [ "${LD_FDS_SAVED:-0}" = "1" ]; then
+        exec 1>&9 2>&8
+        exec 9>&- 8>&-
+      fi
+      unset LD_ACTIVE LD_FDS_SAVED
+      echo "[ld] Recorder state reset to idle"
+      ;;
+
     version|-v|--version)
       printf 'ld %s\n' "$(_ld_version)"
       ;;
@@ -150,6 +159,7 @@ ld command help:
   ld +c            Same as ld c
   ld show          Print current/last log to terminal
   ld status        Show recorder status and file
+  ld recover       Reset recorder state after interrupted sessions
   ld version       Show installed ld version
   ld help          Show this help
 

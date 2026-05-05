@@ -58,6 +58,7 @@ Now paste with `Ctrl+V` into issue reports, chats, or AI tools.
 - `ld +c` - alias of `ld c`
 - `ld status` - show recorder state
 - `ld show` - print current/last log
+- `ld recover` - reset recorder state after interrupted sessions
 - `ld version` - show installed version
 - `ld help` - show command help
 
@@ -143,6 +144,7 @@ Rollback to the latest backup:
 ./tests/smoke_test.sh
 ./tests/clipboard_fallback_test.sh
 ./tests/upgrade_rollback_test.sh
+./tests/state_transition_test.sh
 ```
 
 ## License
