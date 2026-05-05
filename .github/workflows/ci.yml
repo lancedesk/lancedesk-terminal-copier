@@ -37,3 +37,13 @@ jobs:
         run: |
           chmod +x tests/smoke_test.sh
           ./tests/smoke_test.sh
+
+      - name: Run clipboard fallback test
+        run: |
+          chmod +x tests/clipboard_fallback_test.sh
+          ./tests/clipboard_fallback_test.sh
+
+      - name: Run upgrade rollback test
+        run: |
+          chmod +x tests/upgrade_rollback_test.sh
+          ./tests/upgrade_rollback_test.sh

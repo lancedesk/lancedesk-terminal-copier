@@ -19,6 +19,8 @@
 - Logs directory: `~/.local/share/ld/logs/`
 - State directory: `~/.local/state/ld/`
 - Current log pointer: `~/.local/state/ld/current_log`
+- Installed scripts: `~/.config/ld/ld.sh`, `~/.config/ld/install.sh`, `~/.config/ld/uninstall.sh`
+- Upgrade backups: `~/.config/ld/backups/` with latest pointer in `~/.config/ld/backups/last_backup`
 
 ## Session scope
 

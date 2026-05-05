@@ -1,17 +1,36 @@
 # LanceDesk Terminal Copier (`ld`)
 
+[![CI](https://github.com/lancedesk/lancedesk-terminal-copier/actions/workflows/ci.yml/badge.svg)](https://github.com/lancedesk/lancedesk-terminal-copier/actions/workflows/ci.yml)
+
 Record terminal output and copy full session logs in one command.
 
-`ld` is a lightweight terminal logger for bash/zsh on Linux, macOS, and WSL. It keeps your normal shell flow and removes manual highlight-copy for long outputs.
+**LanceDesk Terminal Copier** is a small shell tool for **bash** and **zsh** on Linux, macOS, and WSL. Start recording in a terminal tab, run builds, tests, or scripts, then copy **everything that scrolled by** to the clipboard—ideal for bug reports, incident notes, and pasting into AI assistants—without manually selecting text.
+
+## Who it is for
+
+- Developers and operators who need **verbatim session output**, not a partial screen grab.
+- Anyone filing issues who wants **commands + stdout/stderr** in one paste.
+- Teams that share **repro steps** from real terminals instead of cleaned-up snippets.
 
 ## 60-second quick start
+
+`install.sh` edits `~/.bashrc` and `~/.zshrc` so **new terminals** load `ld` automatically.  
+Running `./install.sh` alone cannot define shell functions in your **current** shell—that is how Unix subprocesses work—so use **one** of the following.
+
+**Recommended (works in bash and zsh): install, then load `ld` in this session**
 
 ```bash
 git clone https://github.com/lancedesk/lancedesk-terminal-copier.git
 cd lancedesk-terminal-copier
 chmod +x install.sh
-./install.sh
-source ~/.bashrc   # or source ~/.zshrc
+./install.sh && source ~/.config/ld/ld.sh
+```
+
+**Bash only — install and load in one step** (run install in the current shell)
+
+```bash
+chmod +x install.sh
+source ./install.sh
 ```
 
 Verify:
@@ -39,7 +58,17 @@ Now paste with `Ctrl+V` into issue reports, chats, or AI tools.
 - `ld +c` - alias of `ld c`
 - `ld status` - show recorder state
 - `ld show` - print current/last log
+- `ld version` - show installed version
 - `ld help` - show command help
+
+## Exit codes (automation-friendly)
+
+- `10` - already recording
+- `11` - stop requested while idle
+- `12` - recorder state is inconsistent
+- `20` - no log available to copy
+- `21` - no supported clipboard utility found
+- `22` - no log available to show
 
 ## Why not just redirect output to a file?
 
@@ -73,12 +102,38 @@ If no clipboard tool is available, logs are still saved and can be viewed with `
 ~/.config/ld/uninstall.sh
 ```
 
+## Upgrade and rollback
+
+Re-running install is idempotent and safe:
+
+```bash
+./install.sh
+```
+
+If an existing `~/.config/ld/ld.sh` differs, installer creates a timestamped backup in
+`~/.config/ld/backups/` and records the latest backup pointer.
+
+Rollback to the latest backup:
+
+```bash
+~/.config/ld/install.sh --rollback
+```
+
 ## Documentation
 
 - `docs/architecture.md` - runtime model and internals
 - `docs/security.md` - privacy and safe-usage guidance
 - `docs/faq.md` - troubleshooting and common questions
 - `docs/roadmap.md` - public roadmap
+- `docs/release.md` - semantic versioning and release checklist
+
+## Testing
+
+```bash
+./tests/smoke_test.sh
+./tests/clipboard_fallback_test.sh
+./tests/upgrade_rollback_test.sh
+```
 
 ## License
 

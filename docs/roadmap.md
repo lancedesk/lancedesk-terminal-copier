@@ -10,7 +10,7 @@
 
 - Automated integration tests for `start -> stop -> copy` flow.
 - Homebrew distribution.
-- Versioned releases with changelog and tags.
+- Versioned releases with changelog and tags (in progress: version file/changelog/release checklist added).
 
 ## Long term
 

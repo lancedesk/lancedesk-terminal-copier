@@ -26,6 +26,12 @@ export PATH="$FAKE_BIN:$PATH"
 # shellcheck source=/dev/null
 source "$PROJECT_ROOT/ld.sh"
 
+version_output="$(ld version)"
+if ! printf '%s' "$version_output" | grep -q "^ld "; then
+  echo "version output did not start with 'ld '"
+  exit 1
+fi
+
 ld start
 echo "hello from smoke test"
 ld stop
