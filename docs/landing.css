@@ -108,6 +108,10 @@ pre {
   background: #0f1730;
 }
 
+.demo-placeholder {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .container {
     grid-template-columns: 1fr;
