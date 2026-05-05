@@ -126,6 +126,14 @@ Rollback to the latest backup:
 - `docs/faq.md` - troubleshooting and common questions
 - `docs/roadmap.md` - public roadmap
 - `docs/release.md` - semantic versioning and release checklist
+- `docs/team-examples.md` - incident/bug/AI templates for teams
+
+## Project policies
+
+- `SECURITY.md` - vulnerability disclosure and response targets
+- `CONTRIBUTING.md` - contribution workflow and quality checklist
+- `CODE_OF_CONDUCT.md` - expected community behavior
+- `SUPPORT.md` - support model and sponsored support direction
 
 ## Testing
 
