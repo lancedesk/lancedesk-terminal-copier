@@ -31,8 +31,9 @@ body {
 }
 
 .logo {
-  width: 96px;
-  height: 96px;
+  width: 200px;
+  height: 40px;
+  object-fit: contain;
 }
 
 h1 {
